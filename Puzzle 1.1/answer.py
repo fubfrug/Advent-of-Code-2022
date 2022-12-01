@@ -10,16 +10,16 @@ class Elf:
 def main():
     with open("input.txt") as file:
         current_elf = Elf(0, 1)
-        fat_elf = None
+        top_elf = Elf(0, 0)
         for line in file.readlines():
             if line.strip() != "":
                 current_elf.calories += int(line.strip())
             else:
-                if fat_elf is None or fat_elf.calories < current_elf.calories:
-                    fat_elf = current_elf
+                if top_elf.calories < current_elf.calories:
+                    top_elf = current_elf
                 current_elf = Elf(0, current_elf.elf_id+1)
 
-        return fat_elf.calories
+        return top_elf.calories
 
 
 if __name__ == "__main__":
